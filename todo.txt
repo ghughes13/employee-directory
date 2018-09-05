@@ -1,0 +1,15 @@
+4. Add Onclick to display Modal for employee
+4.5 Add next/previous button functionality
+4.8 Add Exit button functionality
+
+5. Ensure code is properly commented
+
+6. Add search feature for employees
+-It should filter the 12 on the page; not pull new results
+
+8. Ensure there are no errors in console at begining or end of list
+9. Change some of the CSS and add changes to README file.
+
+
+//got names to show when card is clicked (line 36) Now we need to
+make the modal with that name display. 
