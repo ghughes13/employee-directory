@@ -1,17 +1,19 @@
 let gallery = document.getElementById('gallery');
+let defaultDisplay = gallery.style.display;
 let usersOnPage = [];
 
+//Pulls data from the "Random User Generator API"
 $.ajax({
   url: 'https://randomuser.me/api/?results=12&nat=US',
   dataType: 'json',
   success: function(data) {
     data.results.forEach(person => {
-      // console.log(person);
       addToGallery(person);
     });
   }
 });
 
+//This section adds the ajax data to the page in the proper format.
 let addToGallery = (person) => {
   let userPic = person.picture.large;
   let userName = person.name.first + " " + person.name.last;
@@ -27,28 +29,36 @@ let addToGallery = (person) => {
       </div>`;
   let cardDiv = document.createElement("div");
   cardDiv.setAttribute('class', 'card');
+  cardDiv.setAttribute('id', userName + " card");
   cardDiv.innerHTML = galleryTemplate;
   gallery.appendChild(cardDiv);
   makeModal(userPic, userName, userEmail, person);
+
+  //If a card is clicked, displays that cards modal (Pop up with more info on employee)
   cardDiv.addEventListener('click', (e) => {
     for(let i = 0; i < e.path.length; i++) {
       if(e.path[i].classList.contains('card')) {
-        console.log(i, e.path[i].lastChild.firstChild.innerHTML);
+        let selectedCard = e.path[i].lastChild.firstChild.innerHTML;
+        let findCard = document.getElementById(selectedCard);
+        findCard.style.display = defaultDisplay;
+        findCard.setAttribute('class','modal-container active');
         break;
       };
     }
   });
-};
+}; //end of addToGallery
 
+
+//This section makes the modal element and adds functionality to the buttons on it
 let makeModal = (userPic, userName, userEmail, person) => {
   usersOnPage.push(userName);
   let userCity = person.location.city;
   let userNumber = person.cell;
-  let fullAddress = person.location.street + ", " + person.location.city + ", " + person.location.state + person.location.postcode;
-  let userBirthday = person.dob.date;
+  let fullAddress = person.location.street + ", " + person.location.city + ", " + person.location.state + " " + person.location.postcode;
+  let userBirthday1 = person.dob.date;
+  userBirthday = userBirthday1.substring(0,10);
   let modalContent =
-      `<div class="modal">
-          <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
+      `<div class="modal"><button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
           <div class="modal-info-container">
               <img class="modal-img" src="${userPic}" alt="profile picture">
               <h3 id="name" class="modal-name cap">${userName}</h3>
@@ -67,25 +77,86 @@ let makeModal = (userPic, userName, userEmail, person) => {
       </div>`;
   let modalCard = document.createElement('div');
   modalCard.setAttribute('class','modal-container');
+  modalCard.setAttribute('id', userName);
   modalCard.style.display = 'none';
   modalCard.innerHTML = modalContent;
   document.body.appendChild(modalCard);
-};
 
-let cards = document.getElementsByClassName('card');
-console.log(cards);
+  //Hides the modal if the X button is clicked
+  let xButton = modalCard.firstChild.firstChild;
+  xButton.addEventListener('click', () =>{
+    modalCard.style.display = 'none';
+  });
 
-for(let i = 0; i < cards.length; i++) {
-  console.log('in for loop');
-  cards[i].addEventListener('click', (event) => {
-    let name = document.getElementById('name').innerHTML;
-    console.log(name);
-  })
-};
+  //Moved to next modal/employee if next button is clicked
+  let prevButton = modalCard.lastChild.children[0];
+  prevButton.addEventListener('click', () =>{
+    let currentCard = prevButton.parentNode.parentNode.id;
+    prevButton.parentNode.parentNode.style.display = 'none';
+    for(let i = 0; i < 12; i++) {
+      if(usersOnPage.indexOf(currentCard) == 0){
+        let prevName = usersOnPage[11];
+        let prevCard = document.getElementById(prevName);
+        prevCard.style.display = defaultDisplay;
+      } else if(usersOnPage[i] == currentCard) {
+        let prevName = usersOnPage[i-1];
+        let prevCard = document.getElementById(prevName);
+        prevCard.style.display = defaultDisplay;
+      }
+    }
+  });
+
+  //Moved to next modal/employee if next button is clicked
+  let nextButton = modalCard.lastChild.children[1];
+  nextButton.addEventListener('click', () =>{
+    let currentCard = nextButton.parentNode.parentNode.id;
+    nextButton.parentNode.parentNode.style.display = 'none';
+    for(let i = 0; i < 12; i++) {
+      if(usersOnPage.indexOf(currentCard) == 11){
+        let nextName = usersOnPage[0];
+        let nextCard = document.getElementById(nextName);
+        nextCard.style.display = defaultDisplay;
+      } else if(usersOnPage[i] == currentCard) {
+        let nextName = usersOnPage[i+1];
+        let nextCard = document.getElementById(nextName);
+        nextCard.style.display = defaultDisplay;
+      }
+    }
+  });
+}; //end of makeModal
+
+
+//Adds a search bar
+let searchBar = () => {
+  let divToAddFormTo = document.getElementById('formplace');
+  let searchHTML =
+      `<form action="#" method="get">
+          <input type="search" id="search-input" class="search-input" placeholder="Search...">
+          <input type="submit" value="&#x1F50D;" id="serach-submit" class="search-submit">
+      </form> `;
+  divToAddFormTo.innerHTML = searchHTML;
+
+  //Adds search functionality
+  let searchBar = divToAddFormTo.firstElementChild.firstElementChild;
+  searchBar.addEventListener('keyup', (e) => {
+    let cards = document.getElementsByClassName('card');
+    for(let i = 0; i < 12; i++) {
+      cards[i].style.display = 'none';
+    };
+    for(let i = 0; i < 12; i++) {
+      if(searchBar.value == usersOnPage[i]) {
+        let userToShow = document.getElementById(searchBar.value + " card")
+        userToShow.style.display = defaultDisplay;
+      }
+    };
+    if(searchBar.value.length == 0) {
+      for(let i = 0; i < 12; i++) {
+        cards[i].style.display = defaultDisplay;
+      };
+    }
+  });
+}; //end of searchBar
 
 
 
-// cards.forEach(card => card.addEventListener('click', (event) => {
-//   let name = document.getElementById('name').innerHTML;
-//   console.log(name);
-// }));
+searchBar();
