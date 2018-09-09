@@ -130,7 +130,7 @@ let makeModal = (userPic, userName, userEmail, person) => {
 let searchBar = () => {
   let divToAddFormTo = document.getElementById('formplace');
   let searchHTML =
-      `<form action="#" method="get">
+      `<form action="#" method="get" preventDefault>
           <input type="search" id="search-input" class="search-input" placeholder="Search...">
           <input type="submit" value="&#x1F50D;" id="serach-submit" class="search-submit">
       </form> `;
@@ -144,8 +144,10 @@ let searchBar = () => {
       cards[i].style.display = 'none';
     };
     for(let i = 0; i < 12; i++) {
-      if(searchBar.value == usersOnPage[i]) {
-        let userToShow = document.getElementById(searchBar.value + " card")
+      console.log(searchBar.value);
+      if(usersOnPage[i].includes(searchBar.value)) {
+        console.log(usersOnPage[i]);
+        let userToShow = document.getElementById(usersOnPage[i] + " card")
         userToShow.style.display = defaultDisplay;
       }
     };
