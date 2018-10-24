@@ -1,3 +1,7 @@
-Employee directory project created based on TeamTreeHouse's mockups.
+##Team Tree House - Full Stack JavaScript Project 5
+#Employee Directory
 
-The background color is different from the mockup.
+**Description:** Used an Ajax request to pull data from random users API, parse data, and display it on the page to match a mockup
+**Why:** This Project was created gain more experience with Ajax, using json, and JavaScript
+**Skills** Used: JavaScript; Ajax; 
+Created by Ghughes13
