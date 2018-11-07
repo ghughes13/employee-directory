@@ -48,6 +48,20 @@ let addToGallery = (person) => {
   });
 }; //end of addToGallery
 
+//If a card is clicked, displays that cards modal (Pop up with more info on employee)
+cardDiv.addEventListener('click', function(e) {
+  for (var i = 0; i < e.composedPath.length; i++) {
+    if (e.composedPath[i].classList.contains('card')) {
+      var selectedCard = e.composedPath[i].lastChild.firstChild.innerHTML;
+      var findCard = document.getElementById(selectedCard);
+      findCard.style.display = defaultDisplay;
+      findCard.setAttribute('class', 'modal-container active');
+      break;
+    };
+  }
+});
+}; //end of addToGallery
+
 
 //This section makes the modal element and adds functionality to the buttons on it
 let makeModal = (userPic, userName, userEmail, person) => {
@@ -144,9 +158,7 @@ let searchBar = () => {
       cards[i].style.display = 'none';
     };
     for(let i = 0; i < 12; i++) {
-      console.log(searchBar.value);
       if(usersOnPage[i].includes(searchBar.value)) {
-        console.log(usersOnPage[i]);
         let userToShow = document.getElementById(usersOnPage[i] + " card")
         userToShow.style.display = defaultDisplay;
       }
