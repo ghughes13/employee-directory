@@ -1,9 +1,12 @@
+import axios from './Axios';
+
 let gallery = document.getElementById('gallery');
 let defaultDisplay = gallery.style.display;
 let usersOnPage = [];
 
 //Pulls data from the "Random User Generator API"
-$.ajax({
+axios({
+  method: 'get',
   url: 'https://randomuser.me/api/?results=12&nat=US',
   dataType: 'json',
   success: function(data) {
@@ -12,6 +15,7 @@ $.ajax({
     });
   }
 });
+
 
 //This section adds the ajax data to the page in the proper format.
 let addToGallery = (person) => {
