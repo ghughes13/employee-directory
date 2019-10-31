@@ -1,21 +1,16 @@
-import axios from './Axios';
+import axios from 'axios';
 
 let gallery = document.getElementById('gallery');
-let defaultDisplay = gallery.style.display;
+console.log(gallery);
 let usersOnPage = [];
 
 //Pulls data from the "Random User Generator API"
-axios({
-  method: 'get',
-  url: 'https://randomuser.me/api/?results=12&nat=US',
-  dataType: 'json',
-  success: function(data) {
-    data.results.forEach(person => {
-      addToGallery(person);
-    });
-  }
-});
-
+axios
+      .get("https://randomuser.me/api/?results=50")
+      .then(data => data.data.results.forEach(person => {
+          console.log(person);
+          addToGallery(person);
+        }))
 
 //This section adds the ajax data to the page in the proper format.
 let addToGallery = (person) => {
@@ -44,7 +39,7 @@ let addToGallery = (person) => {
       if(e.path[i].classList.contains('card')) {
         let selectedCard = e.path[i].lastChild.firstChild.innerHTML;
         let findCard = document.getElementById(selectedCard);
-        findCard.style.display = defaultDisplay;
+        findCard.style.display = 'static';
         findCard.setAttribute('class','modal-container active');
         break;
       };
@@ -60,7 +55,7 @@ let makeModal = (userPic, userName, userEmail, person) => {
   let userNumber = person.cell;
   let fullAddress = person.location.street + ", " + person.location.city + ", " + person.location.state + " " + person.location.postcode;
   let userBirthday1 = person.dob.date;
-  userBirthday = userBirthday1.substring(0,10);
+  let userBirthday = userBirthday1.substring(0,10);
   let modalContent =
       `<div class="modal"><button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
           <div class="modal-info-container">
@@ -98,14 +93,14 @@ let makeModal = (userPic, userName, userEmail, person) => {
     let currentCard = prevButton.parentNode.parentNode.id;
     prevButton.parentNode.parentNode.style.display = 'none';
     for(let i = 0; i < 12; i++) {
-      if(usersOnPage.indexOf(currentCard) == 0){
+      if(usersOnPage.indexOf(currentCard) === 0){
         let prevName = usersOnPage[11];
         let prevCard = document.getElementById(prevName);
-        prevCard.style.display = defaultDisplay;
-      } else if(usersOnPage[i] == currentCard) {
+        prevCard.style.display = 'static';
+      } else if(usersOnPage[i] === currentCard) {
         let prevName = usersOnPage[i-1];
         let prevCard = document.getElementById(prevName);
-        prevCard.style.display = defaultDisplay;
+        prevCard.style.display = 'static';
       }
     }
   });
@@ -116,14 +111,14 @@ let makeModal = (userPic, userName, userEmail, person) => {
     let currentCard = nextButton.parentNode.parentNode.id;
     nextButton.parentNode.parentNode.style.display = 'none';
     for(let i = 0; i < 12; i++) {
-      if(usersOnPage.indexOf(currentCard) == 11){
+      if(usersOnPage.indexOf(currentCard) === 11){
         let nextName = usersOnPage[0];
         let nextCard = document.getElementById(nextName);
-        nextCard.style.display = defaultDisplay;
-      } else if(usersOnPage[i] == currentCard) {
+        nextCard.style.display = 'static';
+      } else if(usersOnPage[i] === currentCard) {
         let nextName = usersOnPage[i+1];
         let nextCard = document.getElementById(nextName);
-        nextCard.style.display = defaultDisplay;
+        nextCard.style.display = 'static';
       }
     }
   });
@@ -152,17 +147,15 @@ let searchBar = () => {
       if(usersOnPage[i].includes(searchBar.value)) {
         console.log(usersOnPage[i]);
         let userToShow = document.getElementById(usersOnPage[i] + " card")
-        userToShow.style.display = defaultDisplay;
+        userToShow.style.display = 'static';
       }
     };
-    if(searchBar.value.length == 0) {
+    if(searchBar.value.length === 0) {
       for(let i = 0; i < 12; i++) {
-        cards[i].style.display = defaultDisplay;
+        cards[i].style.display = 'static';
       };
     }
   });
 }; //end of searchBar
-
-
 
 searchBar();

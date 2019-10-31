@@ -17,22 +17,22 @@ function App() {
 
                 <div class="search-container" id = 'formplace'>
                     {/* <!-- ======================
-                        JavaSCript adds a search bar to let you search users on page */}
+                        JavaSCript adds a search bar to let you search users on page
 
                         <form action="#" method="get">
                             <input type="search" id="search-input" class="search-input" placeholder="Search..." />
                             <input type="submit" value="&#x1F50D;" id="serach-submit" class="search-submit" />
                         </form>
-                    {/* ======================= --> */}
+                     ======================= --> */}
                 </div>
             </div>
         </header>
 
         <div id="gallery" class="gallery">
             {/* <!-- ======================
-                JavaScript Dynamically adds 12 users with the following format: */}
+                JavaScript Dynamically adds 12 users with the following format: 
 
-                <div class="card">
+                 <div class="card">
                     <div class="card-img-container">
                         <img class="card-img" src="https://placehold.it/90x90" alt="profile picture" />
                     </div>
@@ -41,14 +41,14 @@ function App() {
                         <p class="card-text">email</p>
                         <p class="card-text cap">city, state</p>
                     </div>
-                </div>
-            {/* ======================= --> */}
+                </div> 
+             ======================= --> */}
         </div>
 
         {/* <!-- =======================
-            JavaScript dynamically adds the following when a user is clicked: */}
+            JavaScript dynamically adds the following when a user is clicked: 
 
-            <div class="modal-container">
+             <div class="modal-container">
                 <div class="modal">
                     <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>
                     <div class="modal-info-container">
@@ -67,15 +67,9 @@ function App() {
                     <button type="button" id="modal-prev" class="modal-prev btn">Prev</button>
                     <button type="button" id="modal-next" class="modal-next btn">Next</button>
                 </div>
-            </div>
-        {/* ======================== --> */}
+            </div> 
+        ======================== --> */}
 
-        <script
-          src="https://code.jquery.com/jquery-3.3.1.min.js"
-          integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-          crossorigin="anonymous">
-        {/* //Jquery CDN */}
-         </script>
     </div>
   );
 }
