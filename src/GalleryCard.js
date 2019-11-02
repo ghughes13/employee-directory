@@ -1,20 +1,32 @@
 import React, {useState} from 'react';
+import Modal from './Modal';
 
 function GalleryCard(props) {
 
-  // [userName, setUsename] = useState(this.props.userName);
+  const [user] = useState(props.props.data.results);
 
-  console.log(props);
+  const showModal = (findThis) => {
+    document.getElementById(findThis).style.display = 'block';
+    console.log(findThis);
+  }
 
-  return (
-    <div className="App">
-      <div class="card-img-container">
-          <img class="card-img" src="${userPic}" alt="profile picture" />
+    const people = user.map((person, index) => 
+      <div className="card" id={'modalID-' + index} key={'modalNum-' + index} onClick={(e) => showModal(person.name.first + '-' + person.name.last)} data-search={person.name.first + '-' + person.name.last}>
+        <div className="card-img-container">
+            <img className="card-img" src={person.picture.large} alt={person.name.first + 'thumbnail picture'} />
+        </div>
+        <div className="card-info-container">
+            <h3 id="name" className="card-name cap">{person.name.first + ' ' + person.name.last}</h3>
+            <p className="card-text">{person.email}</p>
+            <p className="card-text cap">{person.location.city + ", " + person.location.state}</p>
+        </div>
+        <Modal props={person} modalNum={index}/>
       </div>
-      {/* <div class="card-info-container"><h3 id="name" class="card-name cap">{userName}</h3> */}
-          {/* <p class="card-text">{userEmail}</p> */}
-          {/* <p class="card-text cap">{userCityState}</p> */}
-      {/* </div>` */}
+    )
+
+  return ( 
+    <div id="gallery" className="gallery">
+      {people}
     </div>
   );
 }

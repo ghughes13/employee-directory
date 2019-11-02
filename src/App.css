@@ -149,6 +149,7 @@ header h1 {
 ======================================== */
 
 .modal-container {
+    display: none;
     position: fixed;
     top: 0;
     right: 0;
@@ -156,6 +157,7 @@ header h1 {
     left: 0;
     background: rgba(0, 0, 0, 0.7);
 }
+
 
 .modal {
     position: relative;
