@@ -1,4 +1,4 @@
-Converting Project To React
+Originally written in vanilla JS for a TeamTreeHouse Project. Converted to react so I could practice more react.
 
 ------------------------------------------------------
 
