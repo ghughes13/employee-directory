@@ -1,9 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './normalize.css';
 import './App.css';
-import './Oldscript';
+import GalleryCard from './GalleryCard';
 
 function App() {
+
+    let requested = false;
+
+    useEffect(() => {
+        if(!requested) {
+            axios
+            .get("https://randomuser.me/api/?results=50")
+            .then(data => data.data.results.forEach(person => {
+                console.log('requested');
+                setPerson(person);
+            }))
+            requested = true;
+        }
+    });
+
+    const [person, setPerson] = useState('test');
+
   return (
     <div className="App">
       {/* <!-- =======================
@@ -29,6 +47,7 @@ function App() {
         </header>
 
         <div id="gallery" class="gallery">
+            <GalleryCard props={person}/>
             {/* <!-- ======================
                 JavaScript Dynamically adds 12 users with the following format: 
 
