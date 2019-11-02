@@ -1,16 +1,10 @@
-import axios from 'axios';
+
 
 let gallery = document.getElementById('gallery');
 console.log(gallery);
 let usersOnPage = [];
 
-//Pulls data from the "Random User Generator API"
-axios
-      .get("https://randomuser.me/api/?results=50")
-      .then(data => data.data.results.forEach(person => {
-          console.log(person);
-          addToGallery(person);
-        }))
+
 
 //This section adds the ajax data to the page in the proper format.
 let addToGallery = (person) => {
