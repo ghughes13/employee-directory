@@ -7,7 +7,6 @@ function GalleryCard(props) {
 
   const showModal = (findThis) => {
     document.getElementById(findThis).style.display = 'block';
-    console.log(findThis);
   }
 
     const people = user.map((person, index) => 

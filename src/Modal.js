@@ -4,7 +4,6 @@ export default function Modal(props) {
 
   const [modalPerson] = useState(props.props);
 
-  //Hides the modal if the X button is clicked
   const hidecards = (e) => {
     document.querySelectorAll('.modal-container').forEach((card) => {
       card.style.display = "none";
@@ -45,7 +44,7 @@ export default function Modal(props) {
             <p className="modal-text cap">{modalPerson.location.city + ", " + modalPerson.location.state}</p>
             <hr />
             <p className="modal-text">{modalPerson.phone}</p>
-            <p className="modal-text">{modalPerson.location.street + ", " + modalPerson.location.city + ", " + modalPerson.location.state + " " + modalPerson.location.postcode}</p>
+            <p className="modal-text">{modalPerson.location.street.name + " " + modalPerson.location.street.number + ", " + modalPerson.location.city + ", " + modalPerson.location.state + " " + modalPerson.location.postcode}</p>
             <p className="modal-text">Birthday: {modalPerson.dob.date.substring(0,10)}</p>
         </div>
       </div>
