@@ -1,6 +1,6 @@
 <h1>Employee Directory</h1>
 <a href="https://76f3j.csb.app/" target="_blank"><strong>See The Project Here</strong></a>
-
+<br>
 Team Tree House - Full Stack JavaScript Project 5
 Originally written in vanilla JS for a TeamTreeHouse Project. Converted to react so I could practice more react.
 
