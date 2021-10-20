@@ -1,11 +1,13 @@
-Converting Project To React
+<h1>Employee Directory</h1>
+<a href="https://76f3j.csb.app/" target="_blank"><strong>See The Project Here</strong></a>
+<br>
+Team Tree House - Full Stack JavaScript Project 5
+Originally written in vanilla JS for a TeamTreeHouse Project. Converted to react so I could practice more react.
 
 ------------------------------------------------------
 
-##Team Tree House - Full Stack JavaScript Project 5
-#Employee Directory
+**Description:** Used an Ajax request to pull data from random users API, parse data, and display it on the page to match a mockup<br>
+**Why:** This Project was created gain more experience with Ajax, using json, and JavaScript<br>
+**Skills** Used: JavaScript; Ajax; <br>
 
-**Description:** Used an Ajax request to pull data from random users API, parse data, and display it on the page to match a mockup
-**Why:** This Project was created gain more experience with Ajax, using json, and JavaScript
-**Skills** Used: JavaScript; Ajax; 
 Created by Ghughes13
