@@ -1,21 +1,41 @@
 import React, { useState, useEffect } from "react";
 
+interface SyntheticEvent {
+  bubbles: boolean;
+  cancelable: boolean;
+  currentTarget: EventTarget;
+  defaultPrevented: boolean;
+  eventPhase: number;
+  isTrusted: boolean;
+  nativeEvent: Event;
+  preventDefault(): void;
+  stopPropagation(): void;
+  target: EventTarget;
+  timeStamp: Date;
+  type: string;
+}
+
 export default function Modal({
   employee,
   modalNum,
   modalIndex,
   changeModalIndex,
-}) {
+}: { 
+  employee: any
+  modalNum: any
+  modalIndex: any
+  changeModalIndex: any
+} ) {
   const [modalPerson] = useState(employee);
 
   useEffect(() => {});
 
-  const closeModal = (e) => {
+  const closeModal = (e: SyntheticEvent) => {
     changeModalIndex(null);
     e.stopPropagation();
   };
 
-  const showNextModal = (e) => {
+  const showNextModal = (e: SyntheticEvent) => {
     if (modalIndex === 11) {
       changeModalIndex(1);
     } else {
@@ -24,7 +44,7 @@ export default function Modal({
     e.stopPropagation();
   };
 
-  const showPrevModal = (e, num) => {
+  const showPrevModal = (e: SyntheticEvent) => {
     if (modalIndex === 0) {
       changeModalIndex(11);
     } else {
@@ -46,7 +66,7 @@ export default function Modal({
               type="button"
               id="modal-close-btn"
               className="modal-close-btn"
-              onClick={(e) => closeModal(e)}
+              onClick={(e: any) => closeModal(e)}
             >
               <strong>X</strong>
             </button>
@@ -87,7 +107,7 @@ export default function Modal({
               type="button"
               id="modal-prev"
               className="modal-prev btn"
-              onClick={(e) => showPrevModal(e)}
+              onClick={(e: any) => showPrevModal(e)}
             >
               Prev
             </button>
@@ -95,7 +115,7 @@ export default function Modal({
               type="button"
               id="modal-next"
               className="modal-next btn"
-              onClick={(e) => showNextModal(e, changeModalIndex)}
+              onClick={(e: any) => showNextModal(e)}
             >
               Next
             </button>

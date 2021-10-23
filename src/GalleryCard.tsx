@@ -1,11 +1,30 @@
 import React, { useState } from "react";
 import Modal from "./Modal";
 
-function GalleryCard({ employees }) {
+interface person {
+  name: {
+    [key: string]: name,
+  },
+  picture: {
+    large: string
+  },
+  email: string,
+  location: {
+    city: string,
+    state: string,
+  }
+}
+
+interface name {
+  first: string;
+  last: string;
+}
+
+function GalleryCard({ employees }: {employees: person[]}) {
   const [user] = useState(employees);
   const [modalIndex, setModalIndex] = useState();
 
-  const changeModalIndex = (index) => {
+  const changeModalIndex = (index: any) => {
     setModalIndex(index);
   };
 
