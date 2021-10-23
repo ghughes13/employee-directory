@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import "./normalize.css";
 import "./App.css";
 import GalleryCard from "./GalleryCard";
 import SearchBar from "./SearchBar";
+import { json } from "stream/consumers";
+
+interface apiResult {
+  first: string;
+  last: string;
+}
 
 function App() {
   const [employees, setEmployees] = useState();
@@ -12,9 +17,10 @@ function App() {
     fetchUserData();
   }, []);
 
-  const fetchUserData = () => {
-    axios.get("https://randomuser.me/api/?results=12").then((data) => {
-      setEmployees(data.data.results);
+  const fetchUserData = () =>  {
+    fetch("https://randomuser.me/api/?results=12").then(data => data.json()).then(data => {
+      console.log(data)
+      setEmployees(data.results);
     });
   };
 
